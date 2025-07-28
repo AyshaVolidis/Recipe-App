@@ -16,7 +16,7 @@ const appendToParent = (parent, children = []) => {
 const createNavbar = () => {
     let navbar = createElement("nav", ['bg-white','py-4', 'w-full', 'flex', 'justify-between', 'items-center', 'px-6']);
     let logo = createElement("div", ['text-2xl', 'font-medium','text-red-700'], 'RecipeApp');
-    let navLinks = createElement("div", ['flex', 'gap-6', 'text-lg']);
+    let navLinks = createElement("div", ['flex', 'gap-6','hidden','md:inline-flex','lg:inline-flex', 'text-lg']);
     let homeLink = createElement("a", ['text-gray-700','text-lg','font-medium', 'hover:text-red-700'], 'Home');
     homeLink.href = "#";
     let recipeLink = createElement("a", ['text-gray-700','text-lg','font-medium', 'hover:text-red-700'], 'Recipes');
@@ -25,9 +25,18 @@ const createNavbar = () => {
     aboutLink.href = "#about";
     let contactLink = createElement("a", ['text-gray-700','text-lg','font-medium', 'hover:text-red-700'], 'Contact');
     contactLink.href = "#contact";
+
+    let menuIcon = createElement("div", ['md:hidden','text-xl' ,'text-gray-700', 'cursor-pointer']);
+    let menuIconContent = createElement("i", ['fas', 'fa-bars']);
+    appendToParent(menuIcon, [menuIconContent]);
+    let menu=createElement('div',['flex','flex-col','z-50','gap-2','absolute','top-17','right-6','bg-white','shadow-lg','rounded-lg','p-4','hidden','md:hidden','lg:hidden']);
+    appendToParent(menu, [homeLink.cloneNode(true), recipeLink.cloneNode(true), aboutLink.cloneNode(true), contactLink.cloneNode(true)]);
+    menuIcon.onclick = () => {
+        menu.classList.toggle('hidden');
+    };
    
     appendToParent(navLinks, [homeLink, recipeLink, aboutLink, contactLink]);
-    appendToParent(navbar, [logo, navLinks]);
+    appendToParent(navbar, [logo, navLinks,menuIcon,menu]);
     return navbar;
 }
 
