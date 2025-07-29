@@ -19,9 +19,9 @@
       "h1",
       [
         "text-3xl",
-        "font-medium",
-        "text-gray-800",
-        "text-left",
+        "font-bold",
+        "text-red-800",
+        "text-center",
         "pl-2",
         "mt-8",
         "mb-4",
@@ -197,6 +197,8 @@
   dom.appendToParent(dom.app, [
     dom.createNavbar(),
     dom.createHeroSection(),
-    createRecipesSection()
+    dom.createAboutSection(),
+    createRecipesSection(),
+    dom.createFooter(),
   ]);
 })();

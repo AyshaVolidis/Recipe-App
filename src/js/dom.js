@@ -33,12 +33,12 @@ const dom= (function(){
       let menuIconContent = createElement("i", ['fas', 'fa-bars']);
       appendToParent(menuIcon, [menuIconContent]);
       let menu=createElement('div',['flex','flex-col','w-full','z-50','gap-2','absolute','top-17','right-0','left-0','bg-white','shadow-lg','rounded-lg','p-4','hidden','md:hidden','lg:hidden']);
-      appendToParent(menu, [homeLink.cloneNode(true), recipeLink.cloneNode(true), aboutLink.cloneNode(true), contactLink.cloneNode(true)]);
+      appendToParent(menu, [homeLink.cloneNode(true),aboutLink.cloneNode(true),recipeLink.cloneNode(true), contactLink.cloneNode(true)]);
       menuIcon.onclick = () => {
           menu.classList.toggle('hidden');
       };
     
-      appendToParent(navLinks, [homeLink, recipeLink, aboutLink, contactLink]);
+      appendToParent(navLinks, [homeLink, aboutLink, recipeLink,contactLink]);
       appendToParent(navbar, [logo, navLinks,menuIcon,menu]);
       return navbar;
   }
@@ -77,6 +77,88 @@ const dom= (function(){
       appendToParent(heroSection, [transparentOverlay,contentWrapper]);
       return heroSection;
   }
+
+  const createAboutSection = () => {
+    let section = createElement("section", ['bg-white', 'py-10', 'px-6']);
+    section.id = "about";
+    let contentDiv=createElement("div", ['mx-auto', 'text-center']);
+    let title = createElement("h2", ['text-3xl', 'font-bold', 'mb-6', 'text-red-700'], 'About Us');
+    let description = createElement("p", ['text-gray-700', 'text-lg', 'leading-relaxed'], 'Welcome to our Recipe App! We created this project to help food enthusiasts discover and share delicious recipes from around the world. Whether you are a seasoned chef or a beginner in the kitchen, our app provides a platform for you to explore, save, and contribute your favorite recipes.');
+    appendToParent(contentDiv, [title, description]);
+    let containearImages = createElement("div", ['mt-8', 'overflow-hidden']);
+    let innerDiv = createElement("div", ['flex', 'animate-scroll', 'gap-6', 'w-max']);
+    let images = [
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=481&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1484723091739-30a097e8f929?q=80&w=449&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=480&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://plus.unsplash.com/premium_photo-1663858367001-89e5c92d1e0e?q=80&w=415&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1484980972926-edee96e0960d?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg",
+      "https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg",
+      "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/M6HASPARCZHYNN4XTUYT7H6PTE.jpg&w=800&h=600",
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=481&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1484723091739-30a097e8f929?q=80&w=449&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=480&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://plus.unsplash.com/premium_photo-1663858367001-89e5c92d1e0e?q=80&w=415&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1484980972926-edee96e0960d?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg",
+      "https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg",
+      "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/M6HASPARCZHYNN4XTUYT7H6PTE.jpg&w=800&h=600",
+    ];
+    images.forEach((image) => {
+      let img = createElement("img", ['w-48', 'h-48', 'object-cover', 'rounded-lg', 'shadow-lg']);
+      img.src = image;
+      appendToParent(innerDiv, [img]);
+    });
+    appendToParent(containearImages, [innerDiv]);
+    appendToParent(section, [contentDiv, containearImages]);
+    return section;
+  }
+
+  const createLinkwithIcon = (iconClass, text,size) => {
+    let link = createElement("a", ['flex', 'items-center', `text-${size}`, 'text-white', 'hover:text-red-700']);
+    let icon = createElement("i", iconClass);
+    icon.classList.add('mr-2')
+    let linkText = createElement("span", [], text);
+    appendToParent(link, [icon, linkText]);
+    return link;
+  }
+
+  const createFooter = () => {
+    let footer = createElement("footer", ['bg-gray-800', 'text-white', 'py-10', 'text-center']);
+    footer.id = "contact";
+    let footerContent = createElement("div", ['max-w-6xl', 'mx-auto', 'px-4', 'grid', 'grid-cols-1', 'md:grid-cols-3', 'gap-8']);
+    let aboutSection = createElement("div");
+    let aboutTitle = createElement("h3", ['text-xl', 'font-bold', 'mb-2'], 'RecipeApp');
+    let aboutText = createElement("p", ['text-sm'], 'A simple and dynamic recipe web app to discover and manage delicious dishes.');
+    appendToParent(aboutSection, [aboutTitle, aboutText]);
+
+    let contactSection = createElement("div",['flex','flex-col','justify-center','items-center']);
+    let contactTitle = createElement("h3", ['text-xl', 'font-bold', 'mb-2'], 'Contact Us');
+    let contactList = createElement("ul", ['space-y-2', 'text-sm']);
+    appendToParent(contactList, [
+      createLinkwithIcon(['fa-solid', 'fa-envelope'], 'ayshavolidis@gmail.com','lg'),
+      createLinkwithIcon(['fa-solid', 'fa-phone'], '+970 599 999 999','lg'),
+      createLinkwithIcon(['fa-solid', 'fa-location-dot'], 'Palestine,Gaza','lg')
+    ]);
+    appendToParent(contactSection, [contactTitle, contactList]);
+
+    let followSection = createElement("div");
+    let followTitle = createElement("h3", ['text-xl', 'font-bold', 'mb-2'], 'Follow Us');
+    let followList = createElement("div", ['flex','gap-3', 'text-lg','justify-center','items-center']);
+    appendToParent(followList, [
+      createLinkwithIcon(['fa-brands', 'fa-facebook'], '','2xl'),
+      createLinkwithIcon(['fa-brands' ,'fa-instagram'], '','2xl'),
+      createLinkwithIcon(['fa-brands', 'fa-github'], '','2xl')
+    ]);
+    appendToParent(followSection, [followTitle, followList]);
+    appendToParent(footerContent, [aboutSection, contactSection, followSection]);
+    let copyright = createElement("p", ['text-sm', 'mt-6'], '© 2023 RecipeApp. All rights reserved.');
+    appendToParent(footer, [footerContent, copyright]);
+    return footer;
+
+  }
+
 
   const createAddRecipe=()=>{
     let BigDiv=createElement('div',['fixed', 'inset-0', 'flex', 'items-center','justify-center','z-50', 'hidden'])
@@ -206,7 +288,7 @@ const dom= (function(){
 
     const createScrollToTopButton = () => {
       let div=createElement('div');
-      let a=createElement('a',['w-12','h-12','fixed','bottom-16','right-10','z-50','text-center','transition-all','ease-linear','duration-300','bg-red-700','hover:text-white','text-white','text-xl','leading-loose','font-bold'],'');
+      let a=createElement('a',['w-12','h-12','fixed','bottom-16','rounded-full','right-10','z-50','text-center','transition-all','ease-linear','duration-300','bg-red-700','hover:text-white','text-white','text-xl','leading-loose','font-bold'],'');
       a.href="#";
       a.id="scrollup";
       let i=createElement('i',['fa-solid','fa-up-long']);
@@ -230,6 +312,8 @@ const dom= (function(){
       createHeroSection,
       createCard,
       createSpinnear,
-      createScrollToTopButton
+      createScrollToTopButton,
+      createAboutSection,
+      createFooter,
     };
 })();
