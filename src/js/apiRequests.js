@@ -35,10 +35,22 @@ let api=(function() {
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.send(JSON.stringify(recipe))
   }
+const getRecipeDetails = (id, callback) => {
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      let data = JSON.parse(xhr.responseText);
+      callback(data);
+    }
+  };
+  xhr.open("GET", `https://dummyjson.com/recipes/${id}`);
+  xhr.send();
+};
 
   return {
     getRecipes,
     getRecipesByMealType,
-    addRecipe
+    addRecipe,
+    getRecipeDetails
   };
 })();
