@@ -551,6 +551,7 @@
 
     const searchHandler = () => {
       const mealType = searchInput.value.trim().toLowerCase();
+      sippenarDiv.classList.remove("hidden");
       if (!mealType) {
         fetchAll();
       } else {
