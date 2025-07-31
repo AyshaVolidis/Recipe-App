@@ -42,6 +42,9 @@ const getRecipeDetails = (id, callback) => {
       let data = JSON.parse(xhr.responseText);
       callback(data);
     }
+    else{
+      callback({ error: "Recipe not found" });
+    }
   };
   xhr.open("GET", `https://dummyjson.com/recipes/${id}`);
   xhr.send();

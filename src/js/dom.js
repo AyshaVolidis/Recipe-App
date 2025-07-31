@@ -105,91 +105,7 @@ const dom = (function () {
     return navbar;
   };
 
-  const createHeroSection = () => {
-    let heroSection = createElement("section", [
-      "py-32",
-      "relative",
-      "text-center",
-      "bg-cover",
-      "bg-no-repeat",
-    ]);
-    heroSection.style.backgroundImage = "url('/src/public/images/foodbg.jpg')";
-    heroSection.id = "home";
-    let transparentOverlay = createElement("div", [
-      "absolute",
-      "top-0",
-      "left-0",
-      "w-full",
-      "h-full",
-      "bg-black",
-      "opacity-50",
-      "z-0",
-    ]);
-
-    let contentWrapper = createElement("div", ["relative", "z-40", "mx-auto"]);
-
-    let heroTitle = createElement(
-      "h1",
-      ["text-4xl", "font-bold", "text-white"],
-      "Welcome to Your Personal Recipe Book"
-    );
-    let heroSubtitle = createElement(
-      "p",
-      ["text-lg", "text-white", "mt-4"],
-      "Find new recipe ideas or add your own dishes and share your cooking magic."
-    );
-    let btns = createElement("div", [
-      "flex",
-      "items-center",
-      "justify-center",
-      "gap-3",
-    ]);
-    let showBtn = createElement(
-      "button",
-      [
-        "bg-red-700",
-        "border-3",
-        "border-red-700",
-        "text-white",
-        "font-medium",
-        "px-6",
-        "py-3",
-        "rounded-lg",
-        "mt-6",
-      ],
-      "Show Recipes"
-    );
-    let addRecipe = createElement(
-      "button",
-      [
-        "border-3",
-        "border-red-700",
-        "text-white",
-        "font-medium",
-        "px-6",
-        "py-3",
-        "rounded-lg",
-        "mt-6",
-        "cursor-pointer",
-      ],
-      "Add Recipe"
-    );
-    showBtn.onclick = () => {
-      window.location.href = "#recipes";
-    };
-    addRecipe.addEventListener("click", () => {
-      let div = createAddRecipe();
-      console.log(div);
-      div.classList.remove("hidden");
-      appendToParent(app, [div]);
-    });
-
-    appendToParent(btns, [showBtn, addRecipe]);
-    appendToParent(contentWrapper, [heroTitle, heroSubtitle, btns]);
-    appendToParent(heroSection, [transparentOverlay, contentWrapper]);
-    return heroSection;
-  };
-
+  
   const createAboutSection = () => {
     let section = createElement("section", ["bg-white", "py-10", "px-6"]);
     section.id = "about";
@@ -252,7 +168,6 @@ const dom = (function () {
       "items-center",
       `text-${size}`,
       "text-white",
-      "hover:text-red-700",
     ]);
     let icon = createElement("i", iconClass);
     icon.classList.add("mr-2");
@@ -276,9 +191,9 @@ const dom = (function () {
       "grid",
       "grid-cols-1",
       "md:grid-cols-3",
-      "gap-8",
+      "gap-12",
     ]);
-    let aboutSection = createElement("div");
+    let aboutSection = createElement("div",['text-left']);
     let aboutTitle = createElement(
       "h3",
       ["text-xl", "font-bold", "mb-2"],
@@ -294,8 +209,8 @@ const dom = (function () {
     let contactSection = createElement("div", [
       "flex",
       "flex-col",
-      "justify-center",
-      "items-center",
+      "mx-auto",
+      "items-start",
     ]);
     let contactTitle = createElement(
       "h3",
@@ -344,173 +259,14 @@ const dom = (function () {
     ]);
     let copyright = createElement(
       "p",
-      ["text-sm", "mt-6"],
+      ["text-sm",'mt-5','pt-5'],
       "© 2023 RecipeApp. All rights reserved."
     );
     appendToParent(footer, [footerContent, copyright]);
     return footer;
   };
 
-  const createAddRecipe = () => {
-    let BigDiv = createElement("div", [
-      "fixed",
-      "inset-0",
-      "flex",
-      "items-center",
-      "justify-center",
-      "z-50",
-      "hidden",
-    ]);
-    BigDiv.id = "AddRecipeModel";
-
-    let layerDiv = createElement("div", [
-      "absolute",
-      "inset-0",
-      "bg-black/75",
-      "z-40",
-    ]);
-    layerDiv.addEventListener("click", () => {
-      BigDiv.classList.add("hidden");
-    });
-
-    let containearDiv = createElement("div", [
-      "relative",
-      "z-50",
-      "w-full",
-      "bg-white",
-      "rounded-lg",
-      "shadow",
-      "sm:max-w-md",
-      "xl:p-0",
-    ]);
-
-    let contentDiv = createElement("div", [
-      "p-6",
-      "space-y-4",
-      "md:space-y-6",
-      "sm:p-8",
-    ]);
-    let title = createElement(
-      "p",
-      [
-        "text-xl",
-        "font-bold",
-        "leading-tight",
-        "tracking-tight",
-        "text-red-700",
-        "md:text-2xl",
-      ],
-      "Add your Recipe!"
-    );
-
-    let form = createElement("form", ["space-y-4", "md:space-y-6"]);
-    let arrayInputs = ["Name", "Ingredients", "ImageUrl", "MealType"];
-    arrayInputs.forEach((input) => {
-      appendToParent(form, [createDivForm(input)]);
-    });
-
-    let submitbtn = createElement(
-      "button",
-      [
-        "bg-red-700",
-        "text-white",
-        "font-medium",
-        "px-4",
-        "py-2",
-        "rounded-md",
-        "hover:bg-red-800",
-      ],
-      "Add Recipe"
-    );
-    appendToParent(form, [submitbtn]);
-    submitbtn.addEventListener("click", (e) => {
-      let isVaild = true;
-      e.preventDefault();
-      document.querySelectorAll("form [name]").forEach((input) => {
-        if (input.value.trim() == "") {
-          isVaild = false;
-          if (!input.nextElementSibling) {
-            let p = createElement(
-              "p",
-              ["text-red-500"],
-              `${input.name} is required`
-            );
-            appendToParent(input.parentElement, [p]);
-          }
-        }
-      });
-
-      if (isVaild) {
-        let recipe = {};
-        document.querySelectorAll("form [name]").forEach((input) => {
-          recipe[input.name] = input.value;
-        });
-        api.addRecipe(recipe, (data) => {
-          console.log(data);
-          let sucessMessage = createSuccessMessage(
-            "Recipe added successfully!"
-          );
-          appendToParent(BigDiv, [sucessMessage]);
-        });
-        setTimeout(() => {
-          BigDiv.classList.add("hidden");
-        }, 3000);
-      }
-    });
-
-    appendToParent(contentDiv, [title, form]);
-    appendToParent(containearDiv, [contentDiv]);
-    appendToParent(BigDiv, [layerDiv, containearDiv]);
-    return BigDiv;
-  };
-
-  const createDivForm = (name) => {
-    let div = createElement("div");
-    let label = createElement(
-      "label",
-      ["block", "mb-1", "text-sm", "font-medium", "text-gray-900"],
-      name
-    );
-    let input;
-    if (name == "Ingredients" || name == "Instructions") {
-      input = createElement("textarea", [
-        "bg-gray-50",
-        "border",
-        "border-gray-300",
-        "text-gray-900",
-        "rounded-lg",
-        "focus:ring-blue-600",
-        "focus:border-blue-600",
-        "block",
-        "w-full",
-        "p-2.5",
-      ]);
-    } else {
-      input = createElement("input", [
-        "bg-gray-50",
-        "border",
-        "border-gray-300",
-        "text-gray-900",
-        "rounded-lg",
-        "focus:ring-blue-600",
-        "focus:border-blue-600",
-        "block",
-        "w-full",
-        "p-2.5",
-      ]);
-    }
-    input.type = "text";
-    input.name = name;
-    input.addEventListener("input", () => {
-      let errorMessage = input.nextElementSibling;
-      if (errorMessage && errorMessage.tagName === "P") {
-        errorMessage.remove();
-      }
-    });
-    appendToParent(div, [label, input]);
-    return div;
-  };
-
+ 
   const createSuccessMessage = (message) => {
     let successDiv = createElement("div", [
       "p-4",
@@ -596,7 +352,7 @@ const dom = (function () {
     createElement,
     appendToParent,
     createNavbar,
-    createHeroSection,
+    createSuccessMessage,
     createSpinnear,
     createScrollToTopButton,
     createAboutSection,
