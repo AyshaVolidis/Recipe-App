@@ -12,7 +12,6 @@ A simple one-page restaurant app that displays recipes using external API data. 
 - 🔍 Search recipes by keyword
 - 🍱 View all recipes grouped by tag
 - ➕ Add new dishes
-- 📝 Edit or 🗑️ Delete existing recipes
 - 📑 Toggle between **List** and **Grid** view
 - 💻 Fully dynamic UI using `XMLHttpRequest`
 - 📱 Responsive, mobile-first design
@@ -23,11 +22,9 @@ A simple one-page restaurant app that displays recipes using external API data. 
 
 1. The user lands on the homepage and sees a list or grid of available recipes.
 2. The user can:
-   - Search for specific dishes (e.g. "Margherita")
-   - Filter recipes by tag (e.g. "vegan", "dessert")
+   - Filter recipes by MealType (e.g. "dinner", "breakfast")
+   - Can show complete recipe.
    - Add new recipes using a dynamic form
-   - Edit any existing recipe
-   - Delete recipes
    - Toggle between list and grid view using a UI button
 3. All content is dynamically updated without page reload.
 
