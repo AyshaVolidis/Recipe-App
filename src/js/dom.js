@@ -193,7 +193,7 @@ const dom = (function () {
       "md:grid-cols-3",
       "gap-12",
     ]);
-    let aboutSection = createElement("div",['text-left']);
+    let aboutSection = createElement("div",['text-center','md:text-left']);
     let aboutTitle = createElement(
       "h3",
       ["text-xl", "font-bold", "mb-2"],

@@ -24,7 +24,7 @@
       "bg-cover",
       "bg-no-repeat",
     ]);
-    heroSection.style.backgroundImage = "url('/src/public/images/foodbg.jpg')";
+    heroSection.style.backgroundImage = "url('src/public/images/foodbg.jpg')";
     heroSection.id = "home";
     let transparentOverlay = dom.createElement("div", [
       "absolute",
