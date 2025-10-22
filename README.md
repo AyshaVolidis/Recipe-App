@@ -1,4 +1,3 @@
-# api-team-3
 # 🍽️ Recipe App
 
 A simple one-page restaurant app that displays recipes using external API data. Users can browse dishes, search for meals, add new recipes, and update or delete existing ones. The UI supports switching between **list** and **grid** views.
